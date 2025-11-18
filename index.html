@@ -5,14 +5,400 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sohrab Fix - مرکز تعمیرات تخصصی موبایل</title>
 
+<!-- فونت فارسی حرفه‌ای -->
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/modir-font/dist/font-face.css" rel="stylesheet">
+
+<!-- آیکون شبکه‌ها -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
-/* shortened to avoid python string overflow issues in the notebook */
+:root {
+  --bg-image: url("https://i.imgur.com/Oan6lHs_d.jpeg");
+  --text-color: #f5f5f7;
+  --card-bg: rgba(255,255,255,0.06);
+  --blur: 14px;
+  --primary: #ffd60a;
+  --shadow: rgba(0,0,0,0.45);
+  --neon-blue: #00d9ff;
+}
+
+/* بدنه و بک‌گراند */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Modir', sans-serif;
+  background: var(--bg-image) center/cover no-repeat fixed;
+  color: var(--text-color);
+}
+
+/* نور پس‌زمینه */
+.glow {
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  filter: blur(110px);
+  z-index: -1;
+}
+.glow1 { top: -100px; right: -120px; background: #00c3ff; opacity: .6; }
+.glow2 { bottom: -120px; left: -120px; background: #ffd60a; opacity: .6; }
+
+/* هدر */
+header {
+  text-align: center;
+  padding: 70px 20px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+header h1 {
+  font-size: 34px;
+  font-weight: bold;
+  color: #a0eaff;
+  text-shadow: 0 0 12px #00d9ff, 0 0 24px #00d9ff, 0 0 36px #00d9ff;
+}
+
+header h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--neon-blue);
+  margin-top: 6px;
+  text-shadow: 0 0 8px #00d9ff, 0 0 16px #00d9ff, 0 0 24px #00d9ff;
+}
+
+header .cta {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 14px 24px;
+  background: var(--primary);
+  color: #000;
+  font-weight: bold;
+  border-radius: 18px;
+  font-size: 16px;
+  box-shadow: 0 0 20px rgba(255, 214, 10, 0.5);
+  transition: .3s;
+}
+header .cta:hover {
+  transform: scale(1.06);
+}
+
+/* کانتینر */
+.container {
+  width: 92%;
+  margin: auto;
+  padding-bottom: 60px;
+}
+
+/* خدمات ما */
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 40px;
+  text-shadow: 0 0 8px #000;
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.service-item {
+  background: rgba(255,255,255,0.07);
+  padding: 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  backdrop-filter: blur(var(--blur));
+  box-shadow: 0 6px 16px var(--shadow);
+  transition: .3s;
+  border-right: 4px solid var(--primary);
+}
+.service-item:hover {
+  background: rgba(255,255,255,0.13);
+}
+
+.service-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.service-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-size: 14px;
+  transition: .35s ease;
+}
+
+.service-item.active .service-content {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: 10px;
+}
+
+/* درباره ما */
+.about {
+  margin-top: 45px;
+  background: rgba(255,255,255,0.06);
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 8px 25px var(--shadow);
+  backdrop-filter: blur(14px);
+}
+.about p {
+  font-size: 15px;
+  line-height: 1.9;
+  opacity: 0.95;
+}
+
+/* فرم ثبت درخواست */
+.request-form {
+  margin-top: 45px;
+  background: rgba(255,255,255,0.07);
+  padding: 20px;
+  border-radius: 18px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 25px var(--shadow);
+}
+.request-form h3 {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.request-form input,
+.request-form textarea,
+.request-form select {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.1);
+  color: var(--text-color);
+  font-size: 14px;
+}
+.request-form button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 14px;
+  border-radius: 16px;
+  border: none;
+  background: var(--primary);
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 0 20px rgba(255,214,10,.5);
+  transition: .3s;
+}
+.request-form button:hover {
+  transform: scale(1.05);
+}
+
+/* فوتر */
+.footer {
+  text-align: center;
+  padding: 25px;
+  margin-top: 40px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  font-size: 15px;
+  opacity: .9;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.footer .phone {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.footer .socials {
+  display: flex;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.footer .socials a {
+  color: #00d9ff;
+  font-size: 24px;
+  transition: 0.3s;
+}
+
+.footer .socials a:hover {
+  transform: scale(1.2);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) scale(.8);
+  background: #00c853;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 18px;
+  opacity: 0;
+  transition: .3s;
+  z-index: 999;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+@media(max-width:600px) {
+  .services-list { gap: 10px; }
+}
 </style>
 </head>
+
 <body>
-محتوای کامل شما اینجاست — برای جلوگیری از خطا، کد استایل و بدنه کامل در این نسخه کوتاه شده.
+
+<div class="glow glow1" aria-hidden="true"></div>
+<div class="glow glow2" aria-hidden="true"></div>
+
+<!-- هدر -->
+<header>
+  <h1>مرکز تعمیرات تخصصی موبایل</h1>
+  <h2>Sohrab Fix</h2>
+  <a href="#request" class="cta">ثبت درخواست تعمیر</a>
+</header>
+
+<div class="container">
+
+  <!-- خدمات -->
+  <div class="section-title">خدمات ما</div>
+  <div class="services-list">
+    <div class="service-item">
+      <div class="service-title">تعویض باتری</div>
+      <div class="service-content">تعویض باتری‌های اصلی با تست سلامت کامل، جلوگیری از داغی و خاموشی ناگهانی و تضمین عملکرد بلندمدت.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-title">تعویض ال‌سی‌دی / تاچ / گلس</div>
+      <div class="service-content">استفاده از بهترین کیفیت صفحه‌نمایش، نصب بدون گرد و غبار، شفافیت بالا و حساسیت استاندارد لمسی.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-title">تعمیر تخصصی برد</div>
+      <div class="service-content">تعمیر CPU، هارد، آی‌سی، مدار پاور، مشکل آنتن‌دهی، آب‌خوردگی و قطع‌وصل با تجهیزات پیشرفته.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-title">مشکلات صدا</div>
+      <div class="service-content">رفع خش‌خش صدا، نویز، مشکل مکالمه، تعمیر ویبره و تعویض قطعات با کیفیت اصلی.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-title">تعمیر سوکت شارژ</div>
+      <div class="service-content">رفع مشکل شارژ نشدن، قطع و وصل شدن شارژ و تعویض دقیق سوکت بدون آسیب به برد.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-title">تعمیر دوربین</div>
+      <div class="service-content">حل مشکل لرزش، فوکوس، شکستگی لنز، تار شدن تصویر و رفع مشکل سخت‌افزاری دوربین.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-title">خدمات نرم‌افزاری موبایل</div>
+      <div class="service-content">فلش، نصب رام اصلی، حذف FRP، رفع کندی سیستم، حذف بدافزار و بازگردانی کارایی کامل.</div>
+    </div>
+    <div class="service-item">
+      <div class="service-title">بازیابی اطلاعات</div>
+      <div class="service-content">ریکاوری عکس، فیلم و فایل‌های حذف شده حتی پس از ریست، با تضمین امنیت و محرمانگی.</div>
+    </div>
+  </div>
+
+  <!-- درباره ما -->
+  <div class="section-title">درباره ما</div>
+  <div class="about">
+    <p>
+      مجموعه تعمیرات موبایل با بیش از ده سال سابقه درخشان در زمینه تعمیرات تخصصی موبایل،  
+      به‌عنوان یکی از قابل‌اعتمادترین مراکز تعمیرات شناخته می‌شود.  
+      تخصص ما شامل تمامی خدمات نرم‌افزاری و سخت‌افزاری گوشی‌های برند اپل، سامسونگ، شیائومی و دیگر برندهاست.  
+      تمام قطعات مورد استفاده اورجینال و دارای کیفیت تضمین‌شده هستند.  
+      سرویس تحویل و دریافت گوشی درب منزل برای مشتریان سنندج موجود است.  
+      کیفیت بالا، قیمت مناسب و رضایت مشتری، اصول اساسی کار ما هستند.
+    </p>
+  </div>
+
+  <!-- فرم ثبت درخواست -->
+  <div class="request-form" id="request">
+    <h3>ثبت درخواست تعمیر گوشی</h3>
+    <form id="form">
+      <input type="text" id="name" placeholder="نام و نام خانوادگی" required>
+      <input type="tel" id="phone" placeholder="شماره تماس" required>
+      <input type="text" id="model" placeholder="مدل گوشی" required>
+
+      <select id="serviceType" required>
+        <option value="">انتخاب خدمت</option>
+        <option value="battery">تعویض باتری</option>
+        <option value="lcd">تعویض ال‌سی‌دی / تاچ / گلس</option>
+        <option value="board">تعمیر برد</option>
+        <option value="sound">مشکلات صدا</option>
+        <option value="charger">سوکت شارژ</option>
+        <option value="camera">تعمیر دوربین</option>
+        <option value="software">نرم‌افزار موبایل</option>
+        <option value="recover">بازیابی اطلاعات</option>
+      </select>
+
+      <textarea id="problem" rows="4" placeholder="توضیح مشکل..." required></textarea>
+      <button type="submit">ارسال درخواست</button>
+    </form>
+  </div>
+
+  <!-- فوتر -->
+  <div class="footer" role="contentinfo">
+    <div class="phone">09102971003</div>
+    <div class="socials" aria-label="شبکه‌های اجتماعی">
+      <a href="https://instagram.com/sohrab.fix" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      <a href="https://t.me/sohrabfix" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i></a>
+      <a href="https://wa.me/989102971003" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">درخواست با موفقیت آماده در WhatsApp/Telegram ✔</div>
+
+<script>
+// باز/بسته کردن توضیح خدمات
+document.querySelectorAll('.service-item').forEach(item => {
+  item.addEventListener('click', () => {
+    item.classList.toggle('active');
+  });
+});
+
+// فرم با هدایت WhatsApp یا Telegram
+const form = document.getElementById('form');
+const toast = document.getElementById('toast');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const model = document.getElementById('model').value.trim();
+  const service = document.getElementById('serviceType').value;
+  const problem = document.getElementById('problem').value.trim();
+
+  if(!name || !phone || !model || !service || !problem) return;
+
+  const text = `درخواست تعمیر گوشی\nنام: ${name}\nشماره: ${phone}\nمدل: ${model}\nخدمت: ${service}\nتوضیح مشکل: ${problem}`;
+
+  // لینک WhatsApp
+  const waLink = `https://wa.me/989102971003?text=${encodeURIComponent(text)}`;
+  // لینک Telegram (Telegram web doesn't support text param on direct profile link; use share link)
+  const tgLink = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(text)}`;
+
+  // باز کردن لینک WhatsApp در تب جدید
+  window.open(waLink, '_blank', 'noopener');
+
+  // نمایش Toast
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3500);
+  form.reset();
+});
+</script>
+
 </body>
 </html>
